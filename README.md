@@ -1,188 +1,111 @@
-# UniGrants-Server-Side
+# Tasknest - Server-side
 
-Welcome to **UniGrants**! This platform is designed to help students find and apply for scholarships seamlessly. With an intuitive user interface and powerful tools, UniGrants bridges the gap between students and their dreams.
+## Project Overview
 
----
+This is the **server-side** of **Tasknest**, a Task Management Application built using **Node.js**, **Express.js**, and **MongoDB**. It handles authentication, task management, and real-time synchronization to ensure smooth user interactions.
 
-## 🚀 Features
+## Live Link
 
-- **Scholarship Search**: Find scholarships based on location, eligibility, and application fees.
-- **Application Management**: Track your applications easily.
-- **User Roles**:
-  - **Default Users**: Search and apply for scholarships.
-  - **Admins**: Manage scholarship data and platform configurations.
-  - **Moderators**: Moderate user-generated content and reviews.
-- **Interactive Dashboard**: Statistical insights to monitor platform activities.
-- **Responsive Design**: Optimized for all devices.
-- **Secure Authentication**: Powered by Firebase for login and registration.
+[Tasknest Live App](https://cheerful-bonbon-5d608b.netlify.app)
 
----
+## Tech Stack
 
-## 📊 Statistics Dashboard
+- **Node.js** - JavaScript runtime
+- **Express.js** - Backend framework
+- **MongoDB** - NoSQL database
+- **Mongoose** - ODM for MongoDB
+- **Firebase Authentication** - User authentication with Google Sign-In
+- **WebSockets** - Real-time updates
+- **MongoDB Change Streams** - Ensuring real-time syncing
 
-Gain insights into platform performance:
+## Features
 
-- Total Scholarships Listed
-- Total Applications Submitted
-- Total Registered Users
-- User Reviews Count
+- User authentication with Firebase (Google Sign-In)
+- Store user details (User ID, email, display name) in the database
+- CRUD operations for task management
+- Reordering and moving tasks across categories (To-Do, In Progress, Done)
+- Real-time updates for task modifications using WebSockets or MongoDB Change Streams
+- Task deletion with permanent database removal
+- Optimistic UI updates for a smooth user experience
 
----
+## Installation
 
-## 🛠️ Technologies Used
-
-### Frontend
-
-- React.js
-- Tailwind CSS
-- Material UI
-- Framer Motion
-
-### Backend
-
-- Node.js
-- Express.js
-
-### Database
-
-- MongoDB
-
-### Authentication
-
-- Firebase Authentication
-
-### Hosting
-
-- Vercel
-
----
-
-## 🖥️ Installation
-
-1. Clone the repository:
-
+1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/UniGrants.git
+   git clone <repo_url>
+   cd serverside
    ```
-
-2. Navigate to the project directory:
-
-   ```bash
-   cd UniGrants
-   ```
-
-3. Install dependencies:
-
+2. **Install dependencies:**
    ```bash
    npm install
    ```
-
-4. Set up environment variables:
-   Create a `.env` file in the root directory and add the following:
-
-   ```env
-   REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
-   REACT_APP_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
-   REACT_APP_FIREBASE_PROJECT_ID=your_project_id
-   MONGO_URI=your_mongodb_connection_string
-   ```
-
-5. Run the application:
-
+3. **Set up environment variables:**
+   - Create a `.env` file in the root directory
+   - Add the following variables:
+     ```env
+     PORT=5000
+     MONGO_URI=<your_mongodb_connection_string>
+     JWT_SECRET=<your_jwt_secret>
+     FIREBASE_ADMIN_KEY=<your_firebase_key>
+     ```
+4. **Run the server:**
    ```bash
    npm start
    ```
-
-6. Deploy the backend to Vercel:
+   or for development mode with auto-restart:
    ```bash
-   vercel
+   npm run dev
    ```
 
----
+## API Endpoints
 
-## 📦 Folder Structure
+| Method | Endpoint           | Description                               |
+| ------ | ------------------ | ----------------------------------------- |
+| POST   | `/api/auth/signup` | User registration (Google Sign-In)        |
+| POST   | `/api/auth/login`  | User login                                |
+| GET    | `/api/tasks`       | Retrieve all tasks for the logged-in user |
+| POST   | `/api/tasks`       | Add a new task                            |
+| PUT    | `/api/tasks/:id`   | Update task details                       |
+| DELETE | `/api/tasks/:id`   | Delete a task                             |
+
+## Folder Structure
 
 ```
-UniGrants/
-├── public/
-├── src/
-│   ├── components/
-│   │   ├── Navbar.js
-│   │   ├── Footer.js
-│   │   ├── Statistics.js
-│   ├── hooks/
-│   │   ├── useAll_Schol.js
-│   │   ├── useAllApply.js
-│   ├── pages/
-│   │   ├── Home.js
-│   │   ├── About.js
-│   │   ├── Contact.js
-│   ├── styles/
-│   │   ├── global.css
-├── .env
-├── package.json
+serverside/
+│-- src/
+│   ├── models/        # Database models
+│   ├── routes/        # API routes
+│   ├── controllers/   # Business logic
+│   ├── middleware/    # Auth & validation middleware
+│   ├── config/        # Database connection & env setup
+│   ├── utils/         # Helper functions
+│   ├── server.js      # Entry point
+│-- .env               # Environment variables
+│-- package.json       # Dependencies & scripts
+│-- README.md          # Project documentation
 ```
 
----
+## Bonus Features (Optional but Recommended)
 
-## 📋 API Endpoints
+- **Dark Mode Toggle**
+- **Task Due Dates with Color Indicators** (e.g., overdue tasks appear red)
+- **Simple Activity Log** (e.g., "Task moved to Done")
 
-### Scholarships
+## Contributing
 
-- **GET** `/api/scholarships`: Fetch all scholarships.
-- **POST** `/api/scholarships`: Add a new scholarship.
-- **PATCH** `/api/scholarships/:id`: Update a scholarship.
+1. Fork the repository
+2. Create a new branch (`feature/your-feature`)
+3. Commit your changes (`git commit -m "Add your feature"`)
+4. Push to your branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
 
-### Applications
+## License
 
-- **GET** `/api/applications`: Fetch all applications.
-- **POST** `/api/applications`: Submit a new application.
+This project is licensed under the **MIT License**.
 
-### Users
+## Contact
 
-- **GET** `/api/users`: Fetch all users.
-- **PATCH** `/api/users/:id`: Update user roles or information.
+For any inquiries or support, feel free to reach out:
 
----
-
-## 🌐 Live Demo
-
-Experience UniGrants live:
-[UniGrants Platform](https://unigrants.netlify.app)
-
----
-
-## 🤝 Contribution
-
-We welcome contributions! Follow these steps:
-
-1. Fork the repository.
-2. Create a new branch:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Add your message here"
-   ```
-4. Push to the branch:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-5. Open a pull request.
-
----
-
-## 🛡️ License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
----
-
-## 📞 Contact
-
-For any inquiries or feedback, feel free to reach out:
-
-- **Email**: akwebdev69@gmail.com
-- **Phone**: +880 1768037870
-- **Location**: Dhaka, Bangladesh
+- **Email:** akwebdev69@gmail.com
+- **GitHub:** [akweb69](https://github.com/akweb69)
